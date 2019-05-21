@@ -1,0 +1,32 @@
+.text-dark-mode {
+    color: white !important;
+}
+
+.dark-mode {
+    background-color: #121212;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #121212), to(#121212));
+    background-image: linear-gradient(180deg, #121212 10%, #121212 100%);
+    background-size: cover;
+}
+
+.login-img {
+    background: url('../img/login.png') !important;
+}
+
+.card {
+    background-color: #212121 !important;
+}
+
+.form-dark-mode {
+    background-color: #212121 !important;
+    border: 1px solid #525252 !important;
+    color: white;
+}
+
+.form-dark-mode::placeholder {
+    color: white !important;
+}
+
+.black-a {
+    color: white;
+}
