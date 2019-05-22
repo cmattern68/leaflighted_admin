@@ -47,4 +47,9 @@ Class Lib {
             $ip = $_SERVER['REMOTE_ADDR'];
         return $ip;
     }
+
+    function getLocationFromIp($ip)
+    {
+        return "test";
+    }
 }

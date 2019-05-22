@@ -12,11 +12,11 @@ $user = new User($_SESSION['user_id']);
 $page = Lib::Sanitize($_GET['page']);
 $pages = scandir("pages");
 $content = "";
-
 if (!empty($page) && in_array($page.".php", $pages))
     $content = 'pages/'.$page.".php";
 else
     header("Location:index.php?page=home");
+
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -32,6 +32,7 @@ else
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <!-- Custom styles for this template-->
         <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="../img/logo.png"/>
     </head>

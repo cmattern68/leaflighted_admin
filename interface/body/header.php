@@ -34,6 +34,8 @@ if (preg_match("/body/i", $_SERVER['REQUEST_URI']))
                 <a class="collapse-item" href="index.php?page=add_user">Register new user</a>
                 <a class="collapse-item" href="index.php?page=edit_user">Edit user</a>
                 <a class="collapse-item" href="index.php?page=delete_user">Delete user</a>
+                <a class="collapse-item" href="index.php?page=generate_auth_token">Generate auth token</a>
+                <a class="collapse-item" href="index.php?page=delete_auth_token">Delete auth token</a>
                 <a class="collapse-item" href="index.php?page=logs">View Logs</a>
             </div>
         </div>

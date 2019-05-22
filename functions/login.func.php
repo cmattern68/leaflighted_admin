@@ -39,7 +39,7 @@ function startLoginProcedure($email, $password) {
     $result = $request->fetch();
     if (empty($result))
         $errors[] = "Error: no user found for this email";
-    else if ($password != $result['password'])
+    else if (!password_verify($password, $result['password']))
         $errors[] = "Error: incorrect password";
     if (!empty($errors)) {
         foreach ($errors as $error) {

@@ -13,10 +13,10 @@ class User {
     public $_avatar;
 
     function __construct($id) {
-        $this->id = Lib::Sanitize($id);
+        $this->_id = Lib::Sanitize($id);
         $dbh = Lib::createSecureDataConnection();
         $request = $dbh->prepare("SELECT email, isadmin, name, lastname, login, avatar FROM users_admin WHERE id=:id");
-        $request->execute(array(":id" => $id));
+        $request->execute(array(":id" => $this->_id));
         $result = $request->fetch();
         if (empty($result))
             return;
@@ -29,15 +29,15 @@ class User {
         $dbh = NULL;
     }
 
-    function getId() {
+    public function getId() {
         return $this->_id;
     }
 
-    function getEmail() {
+    public function getEmail() {
         return $this->_Email;
     }
 
-    function getGrade() {
+    public function getGrade() {
         return $this->_isadmin;
     }
 };
