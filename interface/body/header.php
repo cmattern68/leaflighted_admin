@@ -22,7 +22,7 @@ if (preg_match("/body/i", $_SERVER['REQUEST_URI']))
         Interface
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
-    <?php if ($user->getGrade() == true) { ?>
+    <?php if ($current_user->getGrade() == true) { ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>

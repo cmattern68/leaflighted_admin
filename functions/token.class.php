@@ -1,6 +1,8 @@
 <?php
 
 require_once("Lib.func.php");
+include("generate_oauth_token.func.php");
+include("delete_oauth_token.func.php");
 
 class Token {
     private $_id;
@@ -15,8 +17,10 @@ class Token {
         $request = $dbh->prepare("SELECT id, user_id, isvalidate, associate_ip_adress FROM oauth_tok WHERE token_value=:value");
         $request->execute(array(":value" => $this->_value));
         $result = $request->fetch();
-        if (empty($result))
+        if (empty($result)) {
+            $this->_value = null;
             return;
+        }
         $this->_id = Lib::Sanitize($result['id']);
         $this->_user_id = Lib::Sanitize($result['user_id']);
         $this->_isvalidate = Lib::Sanitize($result['isvalidate']);

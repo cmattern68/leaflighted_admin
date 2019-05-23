@@ -1,11 +1,31 @@
 <?php
 require_once("../functions/user.class.php");
+require_once("../functions/token.class.php");
+
 session_start();
 if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     session_destroy();
     header("Location: ../index.php");
 }
-$user = new User($_SESSION['user_id']);
+$current_user = new User($_SESSION['user_id']);
+if (isset($_COOKIE['oauth_tok'])) {
+    $token = new Token(Lib::Sanitize($_COOKIE['oauth_tok']));
+    if ($token->getValue() == null || $token->getUserAssociateId() !== $current_user->getId() || $token->getValidation() == false)
+        header("Location: ../index.php");
+    else {
+        $objArr = $current_user->getTokens();
+        $isFound = false;
+        foreach ($objArr as $obj) {
+            if ($token->getValue() === $obj->getValue()) {
+                $isFound = true;
+                break;
+            }
+        }
+        if (!$isFound)
+            header("Location: ../index.php");
+    }
+} else
+    header("Location: ../index.php");
 
 /*pages*/
 

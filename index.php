@@ -1,3 +1,14 @@
+<?php
+
+$error = "";
+if (isset($_GET['token'])) {
+    include("functions/token.class.php");
+    $token = new Token($_GET['token']);
+    $error = isValidToken($token, false);
+    if ($error === "")
+        setValidationAndCookie($token);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +30,11 @@
 
 <body class="bg-gradient-primary dark-mode">
     <div class="container">
-        <?php
-        include("pages/login.php")
-        ?>
+                            <?php
+                            if (!empty($error) && $error !== "")
+                            echo $error;
+                            include("pages/login.php")
+                            ?>
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

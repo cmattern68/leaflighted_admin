@@ -1,6 +1,8 @@
 <?php
 if (preg_match("/page/i", $_SERVER['REQUEST_URI']) && !preg_match("/index.php/i", $_SERVER['REQUEST_URI']))
     echo "<script type=\"text/javascript\">window.location.href = 'index.php?page=home';</script>";
+if (!$current_user->getGrade())
+    header("Location:index.php?page=home");
 require_once("../functions/edit_user.func.php");
 if (isset($_GET['id']) && isset($_GET['rank'])) {
     $id = Lib::Sanitize($_GET['id']);

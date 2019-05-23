@@ -1,12 +1,11 @@
 <?php
-
-require_once("Lib.func.php");
-include("user.class.php");
+require_once("token.class.php");
 
 function initLogin() {
     $email = Lib::Sanitize($_POST['email']);
     $password = Lib::Sanitize($_POST['password']);
     $errors = array();
+    $token = null;
 
     if (empty($email))
         $errors[] = "Error: no email completed.";
@@ -14,6 +13,15 @@ function initLogin() {
         $errors[] = "Error: no password completed.";
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         $errors[] = "Error: email is not valid";
+    if (!isset($_COOKIE['oauth_tok']))
+        $errors[] = "Error: no authentification token available.";
+    else {
+        $token = new Token($_COOKIE['oauth_tok']);
+        if (!isValidToken($token, true)) {
+            $error = "Error: invalid token provided.";
+            Lib::Log($email, FALSE, "New login attempts with bad authentification token.", "danger");
+        }
+    }
     if (!empty($errors)) {
         foreach ($errors as $error) {
             echo "
@@ -26,11 +34,21 @@ function initLogin() {
             ";
         }
         Lib::Log($email, FALSE, "New login attempts.", "warning");
-    } else
-        startLoginProcedure($email, $password);
+    } else if ($token != null)
+        startLoginProcedure($email, $password, $token);
+    else {
+        echo "
+        <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+        An error occured. Please, retry later.
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+        <span aria-hidden=\"true\">&times;</span>
+        </button>
+        </div>
+        ";
+    }
 }
 
-function startLoginProcedure($email, $password) {
+function startLoginProcedure($email, $password, $token) {
     $dbh = Lib::createSecureDataConnection();
     $errors = array();
 
@@ -41,6 +59,10 @@ function startLoginProcedure($email, $password) {
         $errors[] = "Error: no user found for this email";
     else if (!password_verify($password, $result['password']))
         $errors[] = "Error: incorrect password";
+    else if ($token->getUserAssociateId() !== Lib::Sanitize($result['id'])) {
+        $errors[] = "Error: no associate authentification token for this account.";
+        Lib::Log($email, FALSE, "New login attempts with bad authentification token.", "danger");
+    }
     if (!empty($errors)) {
         foreach ($errors as $error) {
             echo "
