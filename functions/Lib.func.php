@@ -25,8 +25,8 @@ Class Lib {
         $dateApp = date('Y-m-d H:i:s');
         $ip = Lib::getClientIp();
         $dbh = Lib::createSecureDataConnection();
-        $level = "alert-".$level;
-        $request = $dbh->prepare("INSERT INTO login_log (dateApp, ip, message, success, level) VALUES (:dateApp, :ip, :message, :success, :level)");
+        $level = $level;
+        $request = $dbh->prepare("INSERT INTO log (dateApp, ip, message, success, level) VALUES (:dateApp, :ip, :message, :success, :level)");
         $request->execute(array(
             ':dateApp' => $dateApp,
             ':ip' => $ip,
