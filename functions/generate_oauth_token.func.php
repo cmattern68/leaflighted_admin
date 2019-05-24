@@ -54,7 +54,7 @@ function getUserForTokList()
 
 function isValidToken($token, $by)
 {
-    if ($token->getValue() == null || $token->getValidation() == true) {
+    if ($token->getValue() == null || $token->getValidation() == false) {
         if ($by == false) {
             return "
             <div class=\"row\">
@@ -75,7 +75,7 @@ function isValidToken($token, $by)
     if ($by ==false)
         return "";
     else
-        return false;
+        return true;
 }
 
 function setValidationAndCookie($token)

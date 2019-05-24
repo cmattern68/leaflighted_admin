@@ -64,11 +64,11 @@ if (preg_match("/body/i", $_SERVER['REQUEST_URI']))
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leaflighted" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Leaflighted</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="leaflighted" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Manage Article:</h6>
                 <a class="collapse-item" href="index.php?page=add_article">Add Article</a>
@@ -79,6 +79,17 @@ if (preg_match("/body/i", $_SERVER['REQUEST_URI']))
                 <a class="collapse-item" href="index.php?page=add_game">Add game</a>
                 <a class="collapse-item" href="index.php?page=edit_game">Edit game</a>
                 <a class="collapse-item" href="index.php?page=delete_game">Delete game</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#rite" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Rite</span>
+        </a>
+        <div id="rite" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Manage Rite:</h6>
             </div>
         </div>
     </li>

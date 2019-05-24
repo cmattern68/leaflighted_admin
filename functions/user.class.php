@@ -51,7 +51,7 @@ class User {
     }
 
     public function getEmail() {
-        return $this->_Email;
+        return $this->_email;
     }
 
     public function getGrade() {
@@ -60,5 +60,29 @@ class User {
 
     public function getTokens() {
         return $this->_tokenList;
+    }
+
+    public function setEmail($email) {
+        $this->_email = $email;
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare('UPDATE users_admin SET email=:email WHERE id=:id');
+        $request->execute(array(
+            ':email' => $this->_email,
+            ':id' => $this->_id
+        ));
+        Lib::Log($this->_email, TRUE, "User ".$this->_login." as change his email.", "info");
+        $dbh = null;
+    }
+
+    public function setAvatar($avatar) {
+        $this->_avatar = $avatar;
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare('UPDATE users_admin SET avatar=:avatar WHERE id=:id');
+        $request->execute(array(
+            ':avatar' => $this->_avatar,
+            ':id' => $this->_id
+        ));
+        Lib::Log($this->_email, TRUE, "User ".$this->_login." as change his profil picture.", "info");
+        $dbh = null;
     }
 };

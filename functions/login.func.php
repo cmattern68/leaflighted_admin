@@ -18,8 +18,8 @@ function initLogin() {
     else {
         $token = new Token($_COOKIE['oauth_tok']);
         if (!isValidToken($token, true)) {
-            $error = "Error: invalid token provided.";
-            Lib::Log($email, FALSE, "New login attempts with bad authentification token.", "danger");
+            $errors[] = "Error: invalid token provided.";
+            Lib::Log($email, FALSE, "New login attempts with bad authentification tokena.", "danger");
         }
     }
     if (!empty($errors)) {

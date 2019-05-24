@@ -35,7 +35,7 @@ $logs = generateLogObjArray();
                                     <td scope="col"><?php echo $log->getIp(); ?></th>
                                     <td scope="col"><?php echo $log->getLocation(); ?></th>
                                     <td scope="col"><?php echo $log->_message; ?></th>
-                                    <td scope="col"><?php echo $log->_success; ?></th>
+                                    <td scope="col"><?php echo $log->_success ? "True" : "False"; ?></th>
                                 </tr>
                             <?php
                         }

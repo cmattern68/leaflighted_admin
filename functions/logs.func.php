@@ -36,8 +36,6 @@ class Log {
         if (!isset($city))
             return "Undefined";
         $city = Lib::Sanitize($details['city']);
-        if (empty($city) || $city == "")
-            return "Undefined";
         return $city;
     }
 
@@ -54,7 +52,7 @@ function generateLogObjArray()
 {
     $objArr = array();
     $dbh = Lib::createSecureDataConnection();
-    $request = $dbh->prepare("SELECT id FROM log");
+    $request = $dbh->prepare("SELECT id FROM log ORDER BY id DESC");
     $request->execute();
     $result = $request->fetchAll();
     if (empty($result)) {
