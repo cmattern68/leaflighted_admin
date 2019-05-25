@@ -1,7 +1,5 @@
 <?php
 
-require_once("token.class.php");
-
 function deleteToken($id)
 {
     $dbh = Lib::createSecureDataConnection();

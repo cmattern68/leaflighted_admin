@@ -1,7 +1,7 @@
 <?php
 
 Class Lib {
-    function Sanitize($str) {
+    public function Sanitize($str) {
         $sanitizeStr = trim($str);
         $sanitizeStr = strip_tags($sanitizeStr);
         $sanitizeStr = htmlentities($sanitizeStr, ENT_NOQUOTES);
@@ -9,7 +9,7 @@ Class Lib {
         return $sanitizeStr;
     }
 
-    function createSecureDataConnection() {
+    public function createSecureDataConnection() {
         $dbh = NULL;
         try {
             $dbh = new PDO('mysql:host=localhost;dbname=leaflighted', 'root', '');
@@ -20,7 +20,7 @@ Class Lib {
         return $dbh;
     }
 
-    function Log($name, $succeed, $message, $level)
+    public function Log($name, $succeed, $message, $level)
     {
         $dateApp = date('Y-m-d H:i:s');
         $ip = Lib::getClientIp();
@@ -37,7 +37,7 @@ Class Lib {
         $dbh = NULL;
     }
 
-    function getClientIp() {
+    public function getClientIp() {
         $ip = "";
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -48,8 +48,25 @@ Class Lib {
         return $ip;
     }
 
-    function getLocationFromIp($ip)
+    public function getUserList()
     {
-        return "test";
+        $objArr = array();
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare("SELECT id FROM users_admin");
+        $request->execute();
+        $result = $request->fetchAll();
+        foreach ($result as $key => $value)
+            $objArr[] = new User($value['id']);
+        $dbh = null;
+        return $objArr;
+    }
+
+    public function getLocationFromIp($ip)
+    {
+        $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"), true);
+        if (!isset($details['city']))
+            return "Undefined";
+        $city = Lib::Sanitize($details['city']);
+        return $city;
     }
 }

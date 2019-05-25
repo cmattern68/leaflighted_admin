@@ -1,6 +1,6 @@
 <?php
 if (preg_match("/body/i", $_SERVER['REQUEST_URI']))
-    header("Location: ../index.php?page=home");
+    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
 ?>
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">

@@ -1,8 +1,6 @@
 <?php
 
-require_once("Lib.func.php");
-include("generate_oauth_token.func.php");
-include("delete_oauth_token.func.php");
+require_once("token.func.php");
 
 class Token {
     private $_id;

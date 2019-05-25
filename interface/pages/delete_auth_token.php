@@ -1,9 +1,9 @@
 <?php
-if (preg_match("/page/i", $_SERVER['REQUEST_URI']) && !preg_match("/index.php/i", $_SERVER['REQUEST_URI']))
-    echo "<script type=\"text/javascript\">window.location.href = 'index.php?page=home';</script>";
+if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
+    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
 if (!$current_user->getGrade())
     header("Location:index.php?page=home");
-require_once("../functions/token.class.php");
+require_once("../functions/Token/delete_oauth_token.func.php");
 if (isset($_GET['id'])) {
     $id = Lib::Sanitize($_GET['id']);
     if (is_numeric($id))
@@ -13,6 +13,7 @@ $users = getUserForTokList();
 $midNbUser = count($users) / 2;
 ?>
 <div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-fw fa-cog"></i>Delete Authentification Token</h1>
     <div class="row">
         <div class="col-lg-6">
             <?php

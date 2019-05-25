@@ -1,7 +1,5 @@
 <?php
 
-require_once('Lib.func.php');
-
 function makeChanges(&$current_user)
 {
     if (isset($_FILES['editAvatar'])) {

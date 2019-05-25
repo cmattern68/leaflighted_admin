@@ -1,6 +1,5 @@
 <?php
-require_once("../functions/user.class.php");
-require_once("../functions/token.class.php");
+require_once("../functions/User/user.class.php");
 
 session_start();
 if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
@@ -55,6 +54,8 @@ else
         <link href="../css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="../img/logo.png"/>
+        <!--JavaScript-->
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     </head>
     <body id="page-top">
         <div id="wrapper">

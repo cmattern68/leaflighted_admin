@@ -1,5 +1,5 @@
 <?php
-require_once("token.class.php");
+require_once("functions/Token/token.class.php");
 
 function initLogin() {
     $email = Lib::Sanitize($_POST['email']);

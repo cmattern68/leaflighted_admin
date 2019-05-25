@@ -1,8 +1,8 @@
 <?php
-
-$error = "";
+require_once("functions/Lib.func.php");
 if (isset($_GET['token'])) {
-    include("functions/token.class.php");
+    $error = "";
+    include("functions/Token/token.class.php");
     $token = new Token($_GET['token']);
     $error = isValidToken($token, false);
     if ($error === "")

@@ -1,18 +1,5 @@
 <?php
 
-function getUserList()
-{
-    $objArr = array();
-    $dbh = Lib::createSecureDataConnection();
-    $request = $dbh->prepare("SELECT id FROM users_admin");
-    $request->execute();
-    $result = $request->fetchAll();
-    foreach ($result as $key => $value)
-        $objArr[] = new User($value['id']);
-    $dbh = null;
-    return $objArr;
-}
-
 function deleteUser($id)
 {
     $dbh = Lib::createSecureDataConnection();

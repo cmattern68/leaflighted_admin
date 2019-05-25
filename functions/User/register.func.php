@@ -1,7 +1,5 @@
 <?php
 
-require_once("Lib.func.php");
-
 function initRegisterProcedure() {
     $name = Lib::Sanitize($_POST['name']);
     $lastname = Lib::Sanitize($_POST['lastname']);

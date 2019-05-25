@@ -1,13 +1,14 @@
 <?php
-
-require_once("Lib.func.php");
-include("token.class.php");
+require_once("../functions/Lib.func.php");
+require_once("../functions/Roles/roles.class.php");
+include("../functions/Token/token.class.php");
 
 class User {
     private $_id;
     private $_email;
     private $_isadmin;
     private $_tokenList = array();
+    private $_roles = array();
 
     public $_name;
     public $_lastname;
@@ -23,6 +24,7 @@ class User {
         if (empty($result))
             return;
         $this->_tokenList = $this->generateTokenClassArray($this->_id);
+        $this->_roles = $this->generateRoles($this->_id);
         $this->_email = Lib::Sanitize($result['email']);
         $this->_isadmin = Lib::Sanitize($result['isadmin']);
         $this->_name = Lib::Sanitize($result['name']);
@@ -46,6 +48,23 @@ class User {
         return $objArr;
     }
 
+    private function generateRoles($id) {
+        $objArr = array();
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare("SELECT roles_uuid FROM users_roles WHERE user_id=:id");
+        $request->execute(array(
+            ":id" => $id
+        ));
+        $result = $request->fetchAll();
+        if (empty($result))
+            return NULL;
+        foreach ($result as $key => $value) {
+            $objArr[] = new Roles(Lib::Sanitize($value['roles_uuid']));
+        }
+        $dbh = null;
+        return $objArr;
+    }
+
     public function getId() {
         return $this->_id;
     }
@@ -60,6 +79,10 @@ class User {
 
     public function getTokens() {
         return $this->_tokenList;
+    }
+
+    public function getRoles() {
+        return $this->_roles;
     }
 
     public function setEmail($email) {

@@ -1,12 +1,13 @@
 <?php
-if (preg_match("/page/i", $_SERVER['REQUEST_URI']) && !preg_match("/index.php/i", $_SERVER['REQUEST_URI']))
-    echo "<script type=\"text/javascript\">window.location.href = 'index.php?page=home';</script>";
+if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
+    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
 if (!$current_user->getGrade())
     header("Location:index.php?page=home");
-require_once("../functions/logs.func.php");
+require_once("../functions/Logs/logs.func.php");
 $logs = generateLogObjArray();
 ?>
 <div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-fw fa-cog"></i>Logs</h1>
     <div class="row">
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-target-flush-log">Flush logs</button>
         <table class="table table-hover table-dark">

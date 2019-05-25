@@ -2,7 +2,7 @@
 if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
     header("Location: ../index.php");
 
-include("functions/login.func.php");
+include("functions/User/login.func.php");
 if (isset($_SESSION['user_id']))
     checkValideData($_SESSION['user_id']);
 ?>

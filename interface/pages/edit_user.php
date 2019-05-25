@@ -1,58 +1,61 @@
 <?php
-if (preg_match("/page/i", $_SERVER['REQUEST_URI']) && !preg_match("/index.php/i", $_SERVER['REQUEST_URI']))
-    echo "<script type=\"text/javascript\">window.location.href = 'index.php?page=home';</script>";
+if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
+    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
 if (!$current_user->getGrade())
     header("Location:index.php?page=home");
-require_once("../functions/edit_user.func.php");
+require_once("../functions/User/edit_user.func.php");
 if (isset($_GET['id']) && isset($_GET['rank'])) {
     $id = Lib::Sanitize($_GET['id']);
     $rank = Lib::Sanitize($_GET['rank']);
     if (is_numeric($id) && is_numeric($rank) && $id > 0)
         changeUserRank($id, $rank);
 }
-$users = getUserList();
+$users = Lib::getUserList();
 ?>
-<div class="row">
-    <div class="col-lg-7">
-        <div class="p-5">
-            <table class="table table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Login</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $i = 1;
-                    foreach ($users as $user) {
-                        ?>
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-fw fa-cog"></i>Edit User Right</h1>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="p-5">
+                <table class="table table-hover table-dark">
+                    <thead>
                         <tr>
-                            <th scope="row"><?php echo $i; ?></th>
-                            <td><?php echo $user->_name." ".$user->_lastname; ?></td>
-                            <td><?php echo $user->_login; ?></td>
-                            <td>
-                            <?php
-                            if ($user->getGrade()) {
-                                ?>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-target-<?php print $user->getId(); ?>">Set as users </button>
-                                <?php
-                            } else {
-                                ?>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-target-<?php print $user->getId(); ?>">Set as admin</button>
-                                <?php
-                            }
-                            ?>
-                            </td>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Login</th>
+                            <th scope="col">Action</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                        ++$i;
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        $i = 1;
+                        foreach ($users as $user) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i; ?></th>
+                                <td><?php echo $user->_name." ".$user->_lastname; ?></td>
+                                <td><?php echo $user->_login; ?></td>
+                                <td>
+                                    <?php
+                                    if ($user->getGrade()) {
+                                        ?>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-target-<?php print $user->getId(); ?>">Set as users </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-target-<?php print $user->getId(); ?>">Set as admin</button>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php
+                            ++$i;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
