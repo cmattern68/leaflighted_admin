@@ -1,6 +1,7 @@
 <?php
 if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
     echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
+Lib::print_r2($current_user);
 ?>
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-fw fa-tachometer-alt"></i>Dashboard</h1>

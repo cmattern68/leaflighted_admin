@@ -69,4 +69,10 @@ Class Lib {
         $city = Lib::Sanitize($details['city']);
         return $city;
     }
+
+    public function print_r2($things) {
+        echo "<pre>";
+        print_r($things);
+        echo "</pre>";
+    }
 }

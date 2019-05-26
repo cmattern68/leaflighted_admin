@@ -1,5 +1,6 @@
 <?php
 require_once("../functions/User/user.class.php");
+require_once("../functions/Rooter/rooter.class.php");
 
 session_start();
 if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
@@ -27,15 +28,12 @@ if (isset($_COOKIE['oauth_tok'])) {
     header("Location: ../index.php");
 
 /*pages*/
-
-$page = Lib::Sanitize($_GET['page']);
-$pages = scandir("pages");
-$content = "";
-if (!empty($page) && in_array($page.".php", $pages))
-    $content = 'pages/'.$page.".php";
+$rooter = null;
+if (isset($_GET['page']))
+    $rooter = new Rooter($_GET['page']);
 else
     header("Location:index.php?page=home");
-
+$content = $rooter->getContent();
 ?>
 <!DOCTYPE html>
     <html lang="en">
