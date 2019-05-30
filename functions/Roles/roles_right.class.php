@@ -1,4 +1,5 @@
 <?php
+
 require_once("../functions/Lib.func.php");
 
 class rolesRight {
@@ -6,7 +7,6 @@ class rolesRight {
     private $_uuid;
     private $_roles_uuid;
     private $_associate_right;
-    private $_chmod;
 
     function __construct($uuid) {
         $this->_uuid = $uuid;
@@ -20,8 +20,8 @@ class rolesRight {
             return;
         $this->_id = Lib::Sanitize($result['id']);
         $this->_roles_uuid = Lib::Sanitize($result['roles_uuid']);
-        $this->_associate_right = Lib::Sanitize($result['associate_right']);
-        $this->_chmod = Lib::Sanitize($result['chmod']);
+        $this->_associate_right = substr(Lib::Sanitize($result['associate_right']), 7);
+        $this->_associate_right = str_replace("_", " ", $this->_associate_right);
         $dbh = NULL;
     }
 
@@ -39,10 +39,6 @@ class rolesRight {
 
     public function getAssociateRight() {
         return $this->_associate_right;
-    }
-
-    public function getChmod() {
-        return $this->_chmod;
     }
 
 };

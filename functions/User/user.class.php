@@ -18,13 +18,13 @@ class User {
     function __construct($id) {
         $this->_id = Lib::Sanitize($id);
         $dbh = Lib::createSecureDataConnection();
-        $request = $dbh->prepare("SELECT email, isadmin, name, lastname, login, avatar FROM users_admin WHERE id=:id");
+        $request = $dbh->prepare("SELECT uuid, email, isadmin, name, lastname, login, avatar FROM users_admin WHERE id=:id");
         $request->execute(array(":id" => $this->_id));
         $result = $request->fetch();
         if (empty($result))
             return;
         $this->_tokenList = $this->generateTokenClassArray($this->_id);
-        $this->_roles = $this->generateRoles($this->_id);
+        $this->_roles = $this->generateRoles(Lib::Sanitize($result['uuid']));
         $this->_email = Lib::Sanitize($result['email']);
         $this->_isadmin = Lib::Sanitize($result['isadmin']);
         $this->_name = Lib::Sanitize($result['name']);
@@ -48,12 +48,12 @@ class User {
         return $objArr;
     }
 
-    private function generateRoles($id) {
+    private function generateRoles($uuid) {
         $objArr = array();
         $dbh = Lib::createSecureDataConnection();
-        $request = $dbh->prepare("SELECT roles_uuid FROM users_roles WHERE user_id=:id");
+        $request = $dbh->prepare("SELECT roles_uuid FROM users_roles WHERE user_uuid=:uuid");
         $request->execute(array(
-            ":id" => $id
+            ":uuid" => $uuid
         ));
         $result = $request->fetchAll();
         if (empty($result))

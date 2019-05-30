@@ -28,17 +28,17 @@ $getPage = Lib::Sanitize($_GET['page']);
     || $getPage == 'generate_auth_token' || $getPage == 'delete_auth_token' || $getPage == 'logs') echo 'active'; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>User Config</span>
+            <span>Users Config</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Manage User</h6>
+                <h6 class="collapse-header">Manage Users</h6>
                 <a class="collapse-item" href="index.php?page=add_user">Register new user</a>
-                <a class="collapse-item" href="index.php?page=edit_user">Edit user</a>
-                <a class="collapse-item" href="index.php?page=delete_user">Delete user</a>
-                <h6 class="collapse-header">Manage Token</h6>
-                <a class="collapse-item" href="index.php?page=generate_auth_token">Generate auth token</a>
-                <a class="collapse-item" href="index.php?page=delete_auth_token">Delete auth token</a>
+                <a class="collapse-item" href="index.php?page=edit_user">Edit users roles</a>
+                <a class="collapse-item" href="index.php?page=delete_user">Delete users</a>
+                <h6 class="collapse-header">Manage Tokens</h6>
+                <a class="collapse-item" href="index.php?page=generate_auth_token">Generate auth tokens</a>
+                <a class="collapse-item" href="index.php?page=delete_auth_token">Delete auth tokens</a>
                 <h6 class="collapse-header">Manage Roles</h6>
                 <a class="collapse-item" href="index.php?page=add_roles">Add roles</a>
                 <a class="collapse-item" href="index.php?page=edit_roles">Edit Roles</a>

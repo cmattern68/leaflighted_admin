@@ -51,10 +51,15 @@ class Rooter {
         foreach ($contentTmp as $filePath) {
             $fileName = $this->getFileName($filePath);
             $fileNameArr[substr($fileName, 0, -4)] = $fileName;
-        }    
+        }
         if (in_array($this->_page, $fileNameArr))
-            return $this->_content[substr($this->_page, 0, -4)];
+            return Lib::Sanitize($this->_content[substr($this->_page, 0, -4)]);
         else
             header("Location:index.php?page=home");
+    }
+
+    public function redirectTo($to) {
+        header("Location: ".$to);
+        exit();
     }
 };

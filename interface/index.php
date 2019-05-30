@@ -52,8 +52,11 @@ $content = $rooter->getContent();
         <link href="../css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="../img/logo.png"/>
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
         <!--JavaScript-->
-        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+        <script src="../js/jquery.repeatable.js"></script>
     </head>
     <body id="page-top">
         <div id="wrapper">

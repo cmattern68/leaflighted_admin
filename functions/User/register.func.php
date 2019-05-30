@@ -98,6 +98,7 @@ function register($name, $lastname, $login, $email, $password)
         ':password' => $password
     ));
     $dbh = NULL;
+    insertUserDefaultRight($uuid);
     Lib::Log($email, TRUE, "New register attempts.", "info");
     $message = "Sucess: user ".$name." ".$lastname." added.";
     echo "
@@ -108,4 +109,15 @@ function register($name, $lastname, $login, $email, $password)
     </button>
     </div>
     ";
+}
+
+function insertUserDefaultRight($uuid)
+{
+    $dbh = Lib::createSecureDataConnection();
+    $request = $dbh->prepare('INSERT INTO users_roles (uuid, user_uuid) VALUES (:uuid, :user_uuid)');
+    $request->execute(array(
+        ':uuid' => uniqid(),
+        ':user_uuid' => $uuid
+    ));
+    $dbh = null;
 }
