@@ -5,6 +5,7 @@ include("../functions/Token/token.class.php");
 
 class User {
     private $_id;
+    private $_uuid;
     private $_email;
     private $_isadmin;
     private $_tokenList = array();
@@ -23,8 +24,9 @@ class User {
         $result = $request->fetch();
         if (empty($result))
             return;
+        $this->_uuid = Lib::Sanitize($result['uuid']);
         $this->_tokenList = $this->generateTokenClassArray($this->_id);
-        $this->_roles = $this->generateRoles(Lib::Sanitize($result['uuid']));
+        $this->_roles = $this->generateRoles($this->_uuid);
         $this->_email = Lib::Sanitize($result['email']);
         $this->_isadmin = Lib::Sanitize($result['isadmin']);
         $this->_name = Lib::Sanitize($result['name']);
@@ -83,6 +85,10 @@ class User {
 
     public function getRoles() {
         return $this->_roles;
+    }
+
+    public function getUuid() {
+        return $this->_uuid;
     }
 
     public function setEmail($email) {

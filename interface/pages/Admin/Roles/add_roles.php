@@ -4,7 +4,7 @@ if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
 if (!$current_user->getGrade())
     header("Location:index.php?page=home");
 require_once("../functions/Roles/add_roles.func.php");
-$sections = getSections();
+$sections = Lib::getSections();
 ?>
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-fw fa-cog"></i>Add new roles</h1>

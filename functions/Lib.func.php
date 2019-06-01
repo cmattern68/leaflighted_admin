@@ -75,4 +75,30 @@ Class Lib {
         print_r($things);
         echo "</pre>";
     }
+
+    public function getSections()
+    {
+        $arr = array(
+            "manage_usr" => "Manage Users",
+            "manage_tok" => "Manage Tokens",
+            "manage_rls" => "Manage Roles",
+            "manage_logs" => "Consult Logs",
+            "project_adm" => "Project Administration",
+            "utilities" => "Utilities",
+            "calendar" => "Calendar",
+            "manage_atc" => "Manage Article",
+            "manage_gms" => "Manage Games"
+        );
+        return $arr;
+    }
+
+    public function getRolesList()
+    {
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare('SELECT * FROM roles');
+        $request->execute();
+        $arr = $request->fetchAll();
+        $dbh = null;
+        return $arr;
+    }
 }
