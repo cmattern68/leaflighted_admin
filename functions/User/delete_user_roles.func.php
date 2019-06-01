@@ -1,6 +1,6 @@
 <?php
 
-function changeUserRank()
+function deleteUserRank()
 {
     $errors = array();
     foreach ($_POST['roles'] as $role) {
@@ -60,13 +60,14 @@ function valideRolesUuid($uuid)
 
 function insertUserRoles($user_uuid, $roles_uuid)
 {
+    Lib::print_r2($user_uuid);
+    Lib::print_r2($roles_uuid);
     $dbh = Lib::createSecureDataConnection();
-    $request = $dbh->prepare('INSERT INTO users_roles(uuid, user_uuid, roles_uuid) VALUES(:uuid, :user_uuid, :roles_uuid)');
+    $request = $dbh->prepare('DELETE FROM users_roles WHERE user_uuid=:user_uuid AND roles_uuid=:roles_uuid');
     $request->execute(array(
-        ':uuid' => uniqid(),
         ':user_uuid' => $user_uuid,
         ':roles_uuid' => $roles_uuid,
     ));
     $dbh = null;
-    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=edit_user_roles';</script>";
+    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=delete_user_roles';</script>";
 }

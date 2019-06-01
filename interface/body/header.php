@@ -34,7 +34,8 @@ $getPage = Lib::Sanitize($_GET['page']);
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Manage Users</h6>
                 <a class="collapse-item" href="index.php?page=add_user">Register new user</a>
-                <a class="collapse-item" href="index.php?page=edit_user">Edit users roles</a>
+                <a class="collapse-item" href="index.php?page=edit_user_roles">Edit users roles</a>
+                <a class="collapse-item" href="index.php?page=delete_user_roles">Delete users roles</a>
                 <a class="collapse-item" href="index.php?page=delete_user">Delete users</a>
                 <h6 class="collapse-header">Manage Tokens</h6>
                 <a class="collapse-item" href="index.php?page=generate_auth_token">Generate auth tokens</a>
