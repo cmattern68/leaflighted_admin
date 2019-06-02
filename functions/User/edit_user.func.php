@@ -68,5 +68,5 @@ function insertUserRoles($user_uuid, $roles_uuid)
         ':roles_uuid' => $roles_uuid,
     ));
     $dbh = null;
-    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=edit_user_roles';</script>";
+    echo "<script type=\"text/javascript\">window.location.href = 'index.php?page=edit_user_roles';</script>";
 }

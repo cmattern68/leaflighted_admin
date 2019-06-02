@@ -1,4 +1,5 @@
 <?php
+require("/opt/lampp/htdocs/leaflighted_admin/functions/Library/kint.phar");
 
 Class Lib {
     public function Sanitize($str) {
@@ -108,5 +109,19 @@ Class Lib {
         $arr = $request->fetchAll();
         $dbh = null;
         return $arr;
+    }
+
+    public function getRolesListObj()
+    {
+        $arrObj = array();
+        $dbh = Lib::createSecureDataConnection();
+        $request = $dbh->prepare('SELECT * FROM roles');
+        $request->execute();
+        $arr = $request->fetchAll();
+        foreach ($arr as $key => $value) {
+            $arrObj[] = new Roles(Lib::Sanitize($value['uuid']));
+        }
+        $dbh = null;
+        return $arrObj;
     }
 }

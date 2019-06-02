@@ -1,8 +1,14 @@
 <?php
-if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
+if (preg_match("/pages/i", $_SERVER['REQUEST_URI'])) {
+    echo "here";
+    die();
     echo "<script type=\"text/javascript\">window.location.href = '../../../index.php?page=home';</script>";
-if (!$current_user->asAuthorizationToAccess("Manage Users"))
+}
+if (!$current_user->asAuthorizationToAccess("Manage Users")) {
+    echo "Here 2";
+    die();
     echo "<script type=\"text/javascript\">window.location.href = '../../../index.php?page=home';</script>";
+}
 require_once("../functions/User/edit_user.func.php");
 $users = Lib::getUserList();
 ?>

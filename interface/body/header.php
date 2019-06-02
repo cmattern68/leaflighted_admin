@@ -11,7 +11,7 @@ $getPage = Lib::Sanitize($_GET['page']);
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item <?php if ($getPage == 'home') echo 'active'; ?>">
+    <li class="nav-item">
         <a class="nav-link" href="index.php?page=home">
             <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>

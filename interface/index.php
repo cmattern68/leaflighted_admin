@@ -34,7 +34,6 @@ if (isset($_GET['page']))
 else
     header("Location:index.php?page=home");
 $content = $rooter->getContent();
-$current_user->asAuthorizationToAccess(array("Manage Users", "Manage Tokens"));
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -56,8 +55,7 @@ $current_user->asAuthorizationToAccess(array("Manage Users", "Manage Tokens"));
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
         <!--JavaScript-->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
-        <script src="../js/jquery.repeatable.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>        
     </head>
     <body id="page-top">
         <div id="wrapper">

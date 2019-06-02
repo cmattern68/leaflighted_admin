@@ -52,4 +52,12 @@ class Roles {
     public function getRolesRight() {
         return $this->_rolesRight;
     }
+
+    public function canDoThis($thing) {
+        foreach ($this->_rolesRight as $key => $value) {
+            if (Lib::Sanitize($thing) == $value->getAssociateRight())
+                return true;
+        }
+        return false;
+    }
 };
