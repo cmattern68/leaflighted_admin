@@ -1,8 +1,8 @@
 <?php
 if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
-    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
-if (!$current_user->getGrade())
-    header("Location:index.php?page=home");
+    echo "<script type=\"text/javascript\">window.location.href = '../../../index.php?page=home';</script>";
+if (!$current_user->asAuthorizationToAccess("Manage Users"))
+    echo "<script type=\"text/javascript\">window.location.href = '../../../index.php?page=home';</script>";
 require_once("../functions/User/edit_user.func.php");
 $users = Lib::getUserList();
 ?>
@@ -69,8 +69,8 @@ $users = Lib::getUserList();
                                     </td>
                                 </tr>
                                 <?php
-                                }
                                 ++$i;
+                                }
                             ?>
                         </tbody>
                     </table>

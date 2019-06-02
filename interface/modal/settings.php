@@ -48,8 +48,15 @@ require_once('../functions/User/edit_current_user.func.php');
                                     <dt class="col-sm-3">Login</dt>
                                     <dd class="col-sm-9"><?php echo $current_user->_login; ?></dd>
 
-                                    <dt class="col-sm-3">Admin</dt>
-                                    <dd class="col-sm-9"><?php echo $current_user->getGrade() ? "True" : "False"; ?></dd>
+                                    <dt class="col-sm-3">Roles</dt>
+                                    <dd class="col-sm-9">
+                                        <?php
+                                            $userRoles = $current_user->getRoles();
+                                            foreach ($userRoles as $role) {
+                                                echo "<p>".$role->_name."</p>";
+                                            }
+                                        ?>
+                                    </dd>
 
                                     <dt class="col-sm-3">Number of token</dt>
                                     <dd class="col-sm-9"><?php echo count($current_user->getTokens()); ?></dd>

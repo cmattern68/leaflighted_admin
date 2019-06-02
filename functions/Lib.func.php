@@ -9,6 +9,14 @@ Class Lib {
         return $sanitizeStr;
     }
 
+    public function SanitizeArr($arr) {
+        $sanitizeArr = array();
+        foreach ($arr as $key => $str) {
+            $sanitizeArr[] = Lib::Sanitize($str);
+        }
+        return $sanitizeArr;
+    }
+
     public function createSecureDataConnection() {
         $dbh = NULL;
         try {

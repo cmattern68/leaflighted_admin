@@ -52,7 +52,7 @@ function startLoginProcedure($email, $password, $token) {
     $dbh = Lib::createSecureDataConnection();
     $errors = array();
 
-    $request = $dbh->prepare("SELECT id, email, name, lastname, login, password, isadmin FROM users_admin WHERE email=:email");
+    $request = $dbh->prepare("SELECT id, email, name, lastname, login, password FROM users_admin WHERE email=:email");
     $request->execute(array(":email" => $email));
     $result = $request->fetch();
     if (empty($result))

@@ -1,8 +1,8 @@
 <?php
 if (preg_match("/pages/i", $_SERVER['REQUEST_URI']))
-    echo "<script type=\"text/javascript\">window.location.href = '../index.php?page=home';</script>";
-if (!$current_user->getGrade())
-    header("Location:index.php?page=home");
+    echo "<script type=\"text/javascript\">window.location.href = '../../index.php?page=home';</script>";
+if (!$current_user->asAuthorizationToAccess("Consult Logs"))
+    echo "<script type=\"text/javascript\">window.location.href = '../../index.php?page=home';</script>";
 require_once("../functions/Logs/logs.func.php");
 $logs = generateLogObjArray();
 ?>

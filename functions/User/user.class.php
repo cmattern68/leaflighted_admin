@@ -7,7 +7,6 @@ class User {
     private $_id;
     private $_uuid;
     private $_email;
-    private $_isadmin;
     private $_tokenList = array();
     private $_roles = array();
 
@@ -19,7 +18,7 @@ class User {
     function __construct($id) {
         $this->_id = Lib::Sanitize($id);
         $dbh = Lib::createSecureDataConnection();
-        $request = $dbh->prepare("SELECT uuid, email, isadmin, name, lastname, login, avatar FROM users_admin WHERE id=:id");
+        $request = $dbh->prepare("SELECT uuid, email, name, lastname, login, avatar FROM users_admin WHERE id=:id");
         $request->execute(array(":id" => $this->_id));
         $result = $request->fetch();
         if (empty($result))
@@ -28,7 +27,6 @@ class User {
         $this->_tokenList = $this->generateTokenClassArray($this->_id);
         $this->_roles = $this->generateRoles($this->_uuid);
         $this->_email = Lib::Sanitize($result['email']);
-        $this->_isadmin = Lib::Sanitize($result['isadmin']);
         $this->_name = Lib::Sanitize($result['name']);
         $this->_lastname = Lib::Sanitize($result['lastname']);
         $this->_login = Lib::Sanitize($result['login']);
@@ -73,11 +71,7 @@ class User {
 
     public function getEmail() {
         return $this->_email;
-    }
-
-    public function getGrade() {
-        return $this->_isadmin;
-    }
+    }    
 
     public function getTokens() {
         return $this->_tokenList;
@@ -113,5 +107,32 @@ class User {
         ));
         Lib::Log($this->_email, TRUE, "User ".$this->_login." as change his profil picture.", "info");
         $dbh = null;
+    }
+
+    public function asAuthorizationToAccess($section) {
+        if (gettype($section) == "array")
+            return $this->arrayGiven($section);
+        else
+            return $this->stringGiven($section);
+    }
+
+    private function arrayGiven($sections) {
+        foreach ($sections as $section) {
+            if ($this->stringGiven($section))
+                return true;
+        }
+        return false;
+    }
+
+    private function stringGiven($section) {
+        $userRoles = $this->_roles;
+        $section = Lib::Sanitize($section);
+        foreach ($userRoles as $userRole) {
+            $rolesRight = $userRole->getRolesRight();
+            foreach ($rolesRight as $roleRight)
+                if ($roleRight->getAssociateRight() === $section)
+                    return true;
+        }
+        return false;
     }
 };

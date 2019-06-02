@@ -34,6 +34,7 @@ if (isset($_GET['page']))
 else
     header("Location:index.php?page=home");
 $content = $rooter->getContent();
+$current_user->asAuthorizationToAccess(array("Manage Users", "Manage Tokens"));
 ?>
 <!DOCTYPE html>
     <html lang="en">
